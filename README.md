@@ -1,2 +1,2 @@
-# formal_veri
-Codebase for CSCI course project
+# Formal Verification for Deep Neural Network
+
