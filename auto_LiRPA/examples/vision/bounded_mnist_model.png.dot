@@ -1,0 +1,137 @@
+digraph {
+	"/input-1" [label=<
+            <TABLE BORDER="0" CELLBORDER="0" CELLPADDING="4">
+                <TR><TD><FONT FACE="Arial" COLOR="black">/input-1</FONT></TD></TR>
+                <TR><TD><FONT FACE="Courier" COLOR="blue">BoundInput</FONT></TD></TR>
+                <TR><TD><FONT FACE="Courier" COLOR="grey">(10, 1, 28, 28)</FONT></TD></TR>
+            </TABLE>
+        > shape=diamond]
+	"/1" [label=<
+            <TABLE BORDER="0" CELLBORDER="0" CELLPADDING="4">
+                <TR><TD><FONT FACE="Arial" COLOR="black">/1</FONT></TD></TR>
+                <TR><TD><FONT FACE="Courier" COLOR="blue">BoundParams</FONT></TD></TR>
+                <TR><TD><FONT FACE="Courier" COLOR="grey">(16, 1, 4, 4)</FONT></TD></TR>
+            </TABLE>
+        > fontsize=8 height=0.2 shape=ellipse width=0.5]
+	"/2" [label=<
+            <TABLE BORDER="0" CELLBORDER="0" CELLPADDING="4">
+                <TR><TD><FONT FACE="Arial" COLOR="black">/2</FONT></TD></TR>
+                <TR><TD><FONT FACE="Courier" COLOR="blue">BoundParams</FONT></TD></TR>
+                <TR><TD><FONT FACE="Courier" COLOR="grey">(16,)</FONT></TD></TR>
+            </TABLE>
+        > fontsize=8 height=0.2 shape=ellipse width=0.5]
+	"/3" [label=<
+            <TABLE BORDER="0" CELLBORDER="0" CELLPADDING="4">
+                <TR><TD><FONT FACE="Arial" COLOR="black">/3</FONT></TD></TR>
+                <TR><TD><FONT FACE="Courier" COLOR="blue">BoundParams</FONT></TD></TR>
+                <TR><TD><FONT FACE="Courier" COLOR="grey">(32, 16, 4, 4)</FONT></TD></TR>
+            </TABLE>
+        > fontsize=8 height=0.2 shape=ellipse width=0.5]
+	"/4" [label=<
+            <TABLE BORDER="0" CELLBORDER="0" CELLPADDING="4">
+                <TR><TD><FONT FACE="Arial" COLOR="black">/4</FONT></TD></TR>
+                <TR><TD><FONT FACE="Courier" COLOR="blue">BoundParams</FONT></TD></TR>
+                <TR><TD><FONT FACE="Courier" COLOR="grey">(32,)</FONT></TD></TR>
+            </TABLE>
+        > fontsize=8 height=0.2 shape=ellipse width=0.5]
+	"/5" [label=<
+            <TABLE BORDER="0" CELLBORDER="0" CELLPADDING="4">
+                <TR><TD><FONT FACE="Arial" COLOR="black">/5</FONT></TD></TR>
+                <TR><TD><FONT FACE="Courier" COLOR="blue">BoundParams</FONT></TD></TR>
+                <TR><TD><FONT FACE="Courier" COLOR="grey">(100, 1568)</FONT></TD></TR>
+            </TABLE>
+        > fontsize=8 height=0.2 shape=ellipse width=0.5]
+	"/6" [label=<
+            <TABLE BORDER="0" CELLBORDER="0" CELLPADDING="4">
+                <TR><TD><FONT FACE="Arial" COLOR="black">/6</FONT></TD></TR>
+                <TR><TD><FONT FACE="Courier" COLOR="blue">BoundParams</FONT></TD></TR>
+                <TR><TD><FONT FACE="Courier" COLOR="grey">(100,)</FONT></TD></TR>
+            </TABLE>
+        > fontsize=8 height=0.2 shape=ellipse width=0.5]
+	"/7" [label=<
+            <TABLE BORDER="0" CELLBORDER="0" CELLPADDING="4">
+                <TR><TD><FONT FACE="Arial" COLOR="black">/7</FONT></TD></TR>
+                <TR><TD><FONT FACE="Courier" COLOR="blue">BoundParams</FONT></TD></TR>
+                <TR><TD><FONT FACE="Courier" COLOR="grey">(10, 100)</FONT></TD></TR>
+            </TABLE>
+        > fontsize=8 height=0.2 shape=ellipse width=0.5]
+	"/8" [label=<
+            <TABLE BORDER="0" CELLBORDER="0" CELLPADDING="4">
+                <TR><TD><FONT FACE="Arial" COLOR="black">/8</FONT></TD></TR>
+                <TR><TD><FONT FACE="Courier" COLOR="blue">BoundParams</FONT></TD></TR>
+                <TR><TD><FONT FACE="Courier" COLOR="grey">(10,)</FONT></TD></TR>
+            </TABLE>
+        > fontsize=8 height=0.2 shape=ellipse width=0.5]
+	"/input" [label=<
+            <TABLE BORDER="0" CELLBORDER="0" CELLPADDING="4">
+                <TR><TD><FONT FACE="Arial" COLOR="black">/input</FONT></TD></TR>
+                <TR><TD><FONT FACE="Courier" COLOR="blue">BoundConv</FONT></TD></TR>
+                <TR><TD><FONT FACE="Courier" COLOR="grey">(10, 16, 14, 14)</FONT></TD></TR>
+            </TABLE>
+        > shape=square]
+	"/input-1" -> "/input"
+	"/1" -> "/input"
+	"/2" -> "/input"
+	"/input-4" [label=<
+            <TABLE BORDER="0" CELLBORDER="0" CELLPADDING="4">
+                <TR><TD><FONT FACE="Arial" COLOR="black">/input-4</FONT></TD></TR>
+                <TR><TD><FONT FACE="Courier" COLOR="blue">BoundRelu</FONT></TD></TR>
+                <TR><TD><FONT FACE="Courier" COLOR="grey">(10, 16, 14, 14)</FONT></TD></TR>
+            </TABLE>
+        > shape=square]
+	"/input" -> "/input-4"
+	"/input-8" [label=<
+            <TABLE BORDER="0" CELLBORDER="0" CELLPADDING="4">
+                <TR><TD><FONT FACE="Arial" COLOR="black">/input-8</FONT></TD></TR>
+                <TR><TD><FONT FACE="Courier" COLOR="blue">BoundConv</FONT></TD></TR>
+                <TR><TD><FONT FACE="Courier" COLOR="grey">(10, 32, 7, 7)</FONT></TD></TR>
+            </TABLE>
+        > shape=square]
+	"/input-4" -> "/input-8"
+	"/3" -> "/input-8"
+	"/4" -> "/input-8"
+	"/12" [label=<
+            <TABLE BORDER="0" CELLBORDER="0" CELLPADDING="4">
+                <TR><TD><FONT FACE="Arial" COLOR="black">/12</FONT></TD></TR>
+                <TR><TD><FONT FACE="Courier" COLOR="blue">BoundRelu</FONT></TD></TR>
+                <TR><TD><FONT FACE="Courier" COLOR="grey">(10, 32, 7, 7)</FONT></TD></TR>
+            </TABLE>
+        > shape=square]
+	"/input-8" -> "/12"
+	"/13" [label=<
+            <TABLE BORDER="0" CELLBORDER="0" CELLPADDING="4">
+                <TR><TD><FONT FACE="Arial" COLOR="black">/13</FONT></TD></TR>
+                <TR><TD><FONT FACE="Courier" COLOR="blue">BoundFlatten</FONT></TD></TR>
+                <TR><TD><FONT FACE="Courier" COLOR="grey">(10, 1568)</FONT></TD></TR>
+            </TABLE>
+        > shape=square]
+	"/12" -> "/13"
+	"/input-12" [label=<
+            <TABLE BORDER="0" CELLBORDER="0" CELLPADDING="4">
+                <TR><TD><FONT FACE="Arial" COLOR="black">/input-12</FONT></TD></TR>
+                <TR><TD><FONT FACE="Courier" COLOR="blue">BoundLinear</FONT></TD></TR>
+                <TR><TD><FONT FACE="Courier" COLOR="grey">(10, 100)</FONT></TD></TR>
+            </TABLE>
+        > shape=square]
+	"/13" -> "/input-12"
+	"/5" -> "/input-12"
+	"/6" -> "/input-12"
+	"/15" [label=<
+            <TABLE BORDER="0" CELLBORDER="0" CELLPADDING="4">
+                <TR><TD><FONT FACE="Arial" COLOR="black">/15</FONT></TD></TR>
+                <TR><TD><FONT FACE="Courier" COLOR="blue">BoundRelu</FONT></TD></TR>
+                <TR><TD><FONT FACE="Courier" COLOR="grey">(10, 100)</FONT></TD></TR>
+            </TABLE>
+        > shape=square]
+	"/input-12" -> "/15"
+	"/16" [label=<
+            <TABLE BORDER="0" CELLBORDER="0" CELLPADDING="4">
+                <TR><TD><FONT FACE="Arial" COLOR="black">/16</FONT></TD></TR>
+                <TR><TD><FONT FACE="Courier" COLOR="blue">BoundLinear</FONT></TD></TR>
+                <TR><TD><FONT FACE="Courier" COLOR="grey">(10, 10)</FONT></TD></TR>
+            </TABLE>
+        > shape=square]
+	"/15" -> "/16"
+	"/7" -> "/16"
+	"/8" -> "/16"
+}
