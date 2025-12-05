@@ -21,5 +21,4 @@ cd formal_veri/auto_LiRPA/auto_LiRPA/examples/language/
 python train.py --train --device cpu \
     --model transformer --num_epochs 10 \
     --dir trained_model
-# run eval
 ```
