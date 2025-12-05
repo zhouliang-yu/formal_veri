@@ -79,7 +79,7 @@ results can be found in
 ./results/mnist_mlp_robust_mlp
 ```
 
-### Plotting Command (PDF figures for LaTeX)
+### Plotting Command
 
 ```
 python examples/vision/plot_mnist_mlp_robust_summary.py \
