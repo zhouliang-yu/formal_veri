@@ -1,0 +1,83 @@
+{
+  "total_experiments": 15,
+  "successful_experiments": 0,
+  "failed_experiments": 15,
+  "total_time": 15.72386622428894,
+  "experiments": {
+    "method_IBP_eps_0.5_budget_6": {
+      "success": false,
+      "elapsed_time": 1.0572969913482666,
+      "metrics": {}
+    },
+    "method_IBP_eps_1.0_budget_6": {
+      "success": false,
+      "elapsed_time": 1.0549800395965576,
+      "metrics": {}
+    },
+    "method_IBP_eps_1.5_budget_6": {
+      "success": false,
+      "elapsed_time": 1.0264968872070312,
+      "metrics": {}
+    },
+    "method_IBP+backward_eps_0.5_budget_6": {
+      "success": false,
+      "elapsed_time": 1.0489091873168945,
+      "metrics": {}
+    },
+    "method_IBP+backward_eps_1.0_budget_6": {
+      "success": false,
+      "elapsed_time": 1.0423979759216309,
+      "metrics": {}
+    },
+    "method_IBP+backward_eps_1.5_budget_6": {
+      "success": false,
+      "elapsed_time": 1.062007188796997,
+      "metrics": {}
+    },
+    "method_IBP+backward_train_eps_0.5_budget_6": {
+      "success": false,
+      "elapsed_time": 1.02687406539917,
+      "metrics": {}
+    },
+    "method_IBP+backward_train_eps_1.0_budget_6": {
+      "success": false,
+      "elapsed_time": 1.0271360874176025,
+      "metrics": {}
+    },
+    "method_IBP+backward_train_eps_1.5_budget_6": {
+      "success": false,
+      "elapsed_time": 1.0460951328277588,
+      "metrics": {}
+    },
+    "method_forward_eps_0.5_budget_6": {
+      "success": false,
+      "elapsed_time": 1.0656299591064453,
+      "metrics": {}
+    },
+    "method_forward_eps_1.0_budget_6": {
+      "success": false,
+      "elapsed_time": 1.0525236129760742,
+      "metrics": {}
+    },
+    "method_forward_eps_1.5_budget_6": {
+      "success": false,
+      "elapsed_time": 1.0467231273651123,
+      "metrics": {}
+    },
+    "method_forward+backward_eps_0.5_budget_6": {
+      "success": false,
+      "elapsed_time": 1.044909954071045,
+      "metrics": {}
+    },
+    "method_forward+backward_eps_1.0_budget_6": {
+      "success": false,
+      "elapsed_time": 1.0436301231384277,
+      "metrics": {}
+    },
+    "method_forward+backward_eps_1.5_budget_6": {
+      "success": false,
+      "elapsed_time": 1.0782558917999268,
+      "metrics": {}
+    }
+  }
+}

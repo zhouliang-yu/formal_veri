@@ -1,0 +1,413 @@
+[
+  {
+    "model_name": "natural",
+    "training_config": {
+      "name": "natural",
+      "bound_type": null,
+      "eps": 0.0,
+      "method": "natural"
+    },
+    "test_eps": 0.1,
+    "num_samples": 10,
+    "samples": [
+      {
+        "sample_id": 0,
+        "true_label": 7,
+        "pred_label": 7,
+        "is_robust": true,
+        "margin_lb": 9.317044258117676,
+        "margin_ub": 9.317044258117676,
+        "true_class_lb": -15.270977020263672,
+        "true_class_ub": 30.065397262573242,
+        "most_dangerous_class": 2,
+        "max_other_class_ub": 23.6160945892334
+      },
+      {
+        "sample_id": 1,
+        "true_label": 2,
+        "pred_label": 2,
+        "is_robust": true,
+        "margin_lb": 13.64090347290039,
+        "margin_ub": 13.64090347290039,
+        "true_class_lb": -7.807124137878418,
+        "true_class_ub": 29.300743103027344,
+        "most_dangerous_class": 5,
+        "max_other_class_ub": 20.560611724853516
+      },
+      {
+        "sample_id": 2,
+        "true_label": 1,
+        "pred_label": 1,
+        "is_robust": true,
+        "margin_lb": 6.846079349517822,
+        "margin_ub": 6.846079349517822,
+        "true_class_lb": -22.570627212524414,
+        "true_class_ub": 25.754440307617188,
+        "most_dangerous_class": 2,
+        "max_other_class_ub": 27.933326721191406
+      },
+      {
+        "sample_id": 3,
+        "true_label": 0,
+        "pred_label": 0,
+        "is_robust": true,
+        "margin_lb": 11.336634635925293,
+        "margin_ub": 11.336634635925293,
+        "true_class_lb": -6.170232772827148,
+        "true_class_ub": 21.285770416259766,
+        "most_dangerous_class": 2,
+        "max_other_class_ub": 18.200218200683594
+      },
+      {
+        "sample_id": 4,
+        "true_label": 4,
+        "pred_label": 4,
+        "is_robust": true,
+        "margin_lb": 9.086060523986816,
+        "margin_ub": 9.086060523986816,
+        "true_class_lb": -22.55425262451172,
+        "true_class_ub": 24.527027130126953,
+        "most_dangerous_class": 7,
+        "max_other_class_ub": 22.439870834350586
+      },
+      {
+        "sample_id": 5,
+        "true_label": 1,
+        "pred_label": 1,
+        "is_robust": true,
+        "margin_lb": 8.777727127075195,
+        "margin_ub": 8.777727127075195,
+        "true_class_lb": -20.39659881591797,
+        "true_class_ub": 25.919254302978516,
+        "most_dangerous_class": 2,
+        "max_other_class_ub": 26.739025115966797
+      },
+      {
+        "sample_id": 6,
+        "true_label": 4,
+        "pred_label": 4,
+        "is_robust": true,
+        "margin_lb": 10.428976058959961,
+        "margin_ub": 10.428976058959961,
+        "true_class_lb": -21.205781936645508,
+        "true_class_ub": 25.280033111572266,
+        "most_dangerous_class": 5,
+        "max_other_class_ub": 23.745098114013672
+      },
+      {
+        "sample_id": 7,
+        "true_label": 9,
+        "pred_label": 9,
+        "is_robust": true,
+        "margin_lb": 5.492940902709961,
+        "margin_ub": 5.492940902709961,
+        "true_class_lb": -20.95511817932129,
+        "true_class_ub": 22.69196891784668,
+        "most_dangerous_class": 5,
+        "max_other_class_ub": 24.126243591308594
+      },
+      {
+        "sample_id": 8,
+        "true_label": 5,
+        "pred_label": 5,
+        "is_robust": true,
+        "margin_lb": 1.0794365406036377,
+        "margin_ub": 1.0794365406036377,
+        "true_class_lb": -12.153783798217773,
+        "true_class_ub": 24.789424896240234,
+        "most_dangerous_class": 6,
+        "max_other_class_ub": 21.814407348632812
+      },
+      {
+        "sample_id": 9,
+        "true_label": 9,
+        "pred_label": 9,
+        "is_robust": true,
+        "margin_lb": 3.486684799194336,
+        "margin_ub": 3.486684799194336,
+        "true_class_lb": -16.0252685546875,
+        "true_class_ub": 23.67740249633789,
+        "most_dangerous_class": 7,
+        "max_other_class_ub": 23.978290557861328
+      }
+    ],
+    "certified_robust_accuracy": 1.0,
+    "avg_margin_lb": 7.9492487668991085,
+    "min_margin_lb": 1.0794365406036377,
+    "max_margin_lb": 13.64090347290039
+  },
+  {
+    "model_name": "IBP_eps005",
+    "training_config": {
+      "name": "IBP_eps005",
+      "bound_type": "IBP",
+      "eps": 0.05,
+      "method": "robust"
+    },
+    "test_eps": 0.1,
+    "num_samples": 10,
+    "samples": [
+      {
+        "sample_id": 0,
+        "true_label": 7,
+        "pred_label": 1,
+        "is_robust": false,
+        "margin_lb": -0.06124323979020119,
+        "margin_ub": -0.06124323979020119,
+        "true_class_lb": 0.04089359566569328,
+        "true_class_ub": 0.04089359566569328,
+        "most_dangerous_class": 1,
+        "max_other_class_ub": 0.10213683545589447
+      },
+      {
+        "sample_id": 1,
+        "true_label": 2,
+        "pred_label": 1,
+        "is_robust": false,
+        "margin_lb": -0.1144520565867424,
+        "margin_ub": -0.1144520565867424,
+        "true_class_lb": -0.012315223924815655,
+        "true_class_ub": -0.012315223924815655,
+        "most_dangerous_class": 1,
+        "max_other_class_ub": 0.10213683545589447
+      },
+      {
+        "sample_id": 2,
+        "true_label": 1,
+        "pred_label": 1,
+        "is_robust": true,
+        "margin_lb": 0.06124323979020119,
+        "margin_ub": 0.06124323979020119,
+        "true_class_lb": 0.10177008807659149,
+        "true_class_ub": 0.10239408910274506,
+        "most_dangerous_class": 7,
+        "max_other_class_ub": 0.04118125140666962
+      },
+      {
+        "sample_id": 3,
+        "true_label": 0,
+        "pred_label": 1,
+        "is_robust": false,
+        "margin_lb": -0.11783844977617264,
+        "margin_ub": -0.11783844977617264,
+        "true_class_lb": -0.015701616182923317,
+        "true_class_ub": -0.015701616182923317,
+        "most_dangerous_class": 1,
+        "max_other_class_ub": 0.10213683545589447
+      },
+      {
+        "sample_id": 4,
+        "true_label": 4,
+        "pred_label": 1,
+        "is_robust": false,
+        "margin_lb": -0.1321183741092682,
+        "margin_ub": -0.1321183741092682,
+        "true_class_lb": -0.02998153679072857,
+        "true_class_ub": -0.02998153679072857,
+        "most_dangerous_class": 1,
+        "max_other_class_ub": 0.10213683545589447
+      },
+      {
+        "sample_id": 5,
+        "true_label": 1,
+        "pred_label": 1,
+        "is_robust": true,
+        "margin_lb": 0.06124323979020119,
+        "margin_ub": 0.06124323979020119,
+        "true_class_lb": 0.10213683545589447,
+        "true_class_ub": 0.10213683545589447,
+        "most_dangerous_class": 7,
+        "max_other_class_ub": 0.04089359566569328
+      },
+      {
+        "sample_id": 6,
+        "true_label": 4,
+        "pred_label": 1,
+        "is_robust": false,
+        "margin_lb": -0.1321183741092682,
+        "margin_ub": -0.1321183741092682,
+        "true_class_lb": -0.02998153679072857,
+        "true_class_ub": -0.02998153679072857,
+        "most_dangerous_class": 1,
+        "max_other_class_ub": 0.10213683545589447
+      },
+      {
+        "sample_id": 7,
+        "true_label": 9,
+        "pred_label": 1,
+        "is_robust": false,
+        "margin_lb": -0.11035022139549255,
+        "margin_ub": -0.11035022139549255,
+        "true_class_lb": -0.008213389664888382,
+        "true_class_ub": -0.008213389664888382,
+        "most_dangerous_class": 1,
+        "max_other_class_ub": 0.10213683545589447
+      },
+      {
+        "sample_id": 8,
+        "true_label": 5,
+        "pred_label": 1,
+        "is_robust": false,
+        "margin_lb": -0.18871453404426575,
+        "margin_ub": -0.18871453404426575,
+        "true_class_lb": -0.08657769113779068,
+        "true_class_ub": -0.08657769113779068,
+        "most_dangerous_class": 1,
+        "max_other_class_ub": 0.10213683545589447
+      },
+      {
+        "sample_id": 9,
+        "true_label": 9,
+        "pred_label": 1,
+        "is_robust": false,
+        "margin_lb": -0.11035022139549255,
+        "margin_ub": -0.11035022139549255,
+        "true_class_lb": -0.008213389664888382,
+        "true_class_ub": -0.008213389664888382,
+        "most_dangerous_class": 1,
+        "max_other_class_ub": 0.10213683545589447
+      }
+    ],
+    "certified_robust_accuracy": 0.2,
+    "avg_margin_lb": -0.0844698991626501,
+    "min_margin_lb": -0.18871453404426575,
+    "max_margin_lb": 0.06124323979020119
+  },
+  {
+    "model_name": "IBP_eps01",
+    "training_config": {
+      "name": "IBP_eps01",
+      "bound_type": "IBP",
+      "eps": 0.1,
+      "method": "robust"
+    },
+    "test_eps": 0.1,
+    "num_samples": 10,
+    "samples": [
+      {
+        "sample_id": 0,
+        "true_label": 7,
+        "pred_label": 1,
+        "is_robust": false,
+        "margin_lb": -0.06095299497246742,
+        "margin_ub": -0.06095299497246742,
+        "true_class_lb": 0.04126092791557312,
+        "true_class_ub": 0.041315965354442596,
+        "most_dangerous_class": 1,
+        "max_other_class_ub": 0.10239113867282867
+      },
+      {
+        "sample_id": 1,
+        "true_label": 2,
+        "pred_label": 1,
+        "is_robust": false,
+        "margin_lb": -0.11483382433652878,
+        "margin_ub": -0.11483382433652878,
+        "true_class_lb": -0.012565442360937595,
+        "true_class_ub": -0.012565442360937595,
+        "most_dangerous_class": 1,
+        "max_other_class_ub": 0.10226838290691376
+      },
+      {
+        "sample_id": 2,
+        "true_label": 1,
+        "pred_label": 1,
+        "is_robust": true,
+        "margin_lb": 0.06095299497246742,
+        "margin_ub": 0.06095299497246742,
+        "true_class_lb": 0.1009470596909523,
+        "true_class_ub": 0.1041836068034172,
+        "most_dangerous_class": 7,
+        "max_other_class_ub": 0.042453039437532425
+      },
+      {
+        "sample_id": 3,
+        "true_label": 0,
+        "pred_label": 1,
+        "is_robust": false,
+        "margin_lb": -0.11744009703397751,
+        "margin_ub": -0.11744009703397751,
+        "true_class_lb": -0.015171712264418602,
+        "true_class_ub": -0.015171712264418602,
+        "most_dangerous_class": 1,
+        "max_other_class_ub": 0.10226838290691376
+      },
+      {
+        "sample_id": 4,
+        "true_label": 4,
+        "pred_label": 1,
+        "is_robust": false,
+        "margin_lb": -0.13171957433223724,
+        "margin_ub": -0.13171957433223724,
+        "true_class_lb": -0.029451191425323486,
+        "true_class_ub": -0.029451191425323486,
+        "most_dangerous_class": 1,
+        "max_other_class_ub": 0.10226838290691376
+      },
+      {
+        "sample_id": 5,
+        "true_label": 1,
+        "pred_label": 1,
+        "is_robust": true,
+        "margin_lb": 0.06095299497246742,
+        "margin_ub": 0.06095299497246742,
+        "true_class_lb": 0.10185424238443375,
+        "true_class_ub": 0.1031411737203598,
+        "most_dangerous_class": 7,
+        "max_other_class_ub": 0.04172244668006897
+      },
+      {
+        "sample_id": 6,
+        "true_label": 4,
+        "pred_label": 1,
+        "is_robust": false,
+        "margin_lb": -0.13171957433223724,
+        "margin_ub": -0.13171957433223724,
+        "true_class_lb": -0.029451191425323486,
+        "true_class_ub": -0.029447901993989944,
+        "most_dangerous_class": 1,
+        "max_other_class_ub": 0.10230394452810287
+      },
+      {
+        "sample_id": 7,
+        "true_label": 9,
+        "pred_label": 1,
+        "is_robust": false,
+        "margin_lb": -0.11019925028085709,
+        "margin_ub": -0.11019925028085709,
+        "true_class_lb": -0.007975732907652855,
+        "true_class_ub": -0.0077827246859669685,
+        "most_dangerous_class": 1,
+        "max_other_class_ub": 0.10246966034173965
+      },
+      {
+        "sample_id": 8,
+        "true_label": 5,
+        "pred_label": 1,
+        "is_robust": false,
+        "margin_lb": -0.18859562277793884,
+        "margin_ub": -0.18859562277793884,
+        "true_class_lb": -0.08632723987102509,
+        "true_class_ub": -0.08632723987102509,
+        "most_dangerous_class": 1,
+        "max_other_class_ub": 0.10226838290691376
+      },
+      {
+        "sample_id": 9,
+        "true_label": 9,
+        "pred_label": 1,
+        "is_robust": false,
+        "margin_lb": -0.11019925028085709,
+        "margin_ub": -0.11019925028085709,
+        "true_class_lb": -0.007930867373943329,
+        "true_class_ub": -0.007930867373943329,
+        "most_dangerous_class": 1,
+        "max_other_class_ub": 0.10226838290691376
+      }
+    ],
+    "certified_robust_accuracy": 0.2,
+    "avg_margin_lb": -0.08437541984021664,
+    "min_margin_lb": -0.18859562277793884,
+    "max_margin_lb": 0.06095299497246742
+  }
+]

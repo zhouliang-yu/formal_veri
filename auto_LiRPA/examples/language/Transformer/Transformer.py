@@ -58,9 +58,20 @@ class Transformer(nn.Module):
         if args.load:
             checkpoint = torch.load(args.load, map_location=torch.device(self.device))
             epoch = checkpoint['epoch']
+            self.checkpoint = epoch
             self.model.embeddings.load_state_dict(checkpoint['state_dict_embeddings'])
-            self.model.model_from_embeddings.load_state_dict(checkpoint['state_dict_model_from_embeddings'])
-            logger.info('Checkpoint loaded: {}'.format(args.load))
+            # 检查checkpoint中的state_dict是否是BoundedModule格式
+            ckpt_keys = list(checkpoint['state_dict_model_from_embeddings'].keys())
+            is_bounded_module_format = ckpt_keys and (ckpt_keys[0].startswith('/') or '/2.param' in str(ckpt_keys[0]))
+            if not is_bounded_module_format:
+                # 如果是普通格式，直接加载
+                self.model.model_from_embeddings.load_state_dict(checkpoint['state_dict_model_from_embeddings'])
+                logger.info('Checkpoint loaded: {}'.format(args.load))
+            else:
+                # 如果是BoundedModule格式，先不加载，等转换为BoundedModule后再加载
+                logger.info('Checkpoint contains BoundedModule format, will load after conversion')
+                # 保存checkpoint引用，供后续使用
+                self._checkpoint_bounded_module = checkpoint['state_dict_model_from_embeddings']
 
         self.model_from_embeddings = self.model.model_from_embeddings
         self.word_embeddings = self.model.embeddings.word_embeddings

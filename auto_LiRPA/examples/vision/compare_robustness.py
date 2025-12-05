@@ -34,14 +34,13 @@ def set_seed(seed=100):
 # Training configurations: 9 different experiments
 EXPERIMENTS = [
     {"name": "natural", "bound_type": None, "eps": 0.0, "method": "natural"},
-    {"name": "IBP_eps01", "bound_type": "IBP", "eps": 0.1, "method": "robust"},
-    {"name": "IBP_eps03", "bound_type": "IBP", "eps": 0.3, "method": "robust"},
-    {"name": "CROWN_IBP_eps01", "bound_type": "CROWN-IBP", "eps": 0.1, "method": "robust"},
-    {"name": "CROWN_IBP_eps03", "bound_type": "CROWN-IBP", "eps": 0.3, "method": "robust"},
-    {"name": "CROWN_eps01", "bound_type": "CROWN", "eps": 0.1, "method": "robust"},
-    {"name": "CROWN_eps03", "bound_type": "CROWN", "eps": 0.3, "method": "robust"},
-    {"name": "CROWN_IBP_eps02", "bound_type": "CROWN-IBP", "eps": 0.2, "method": "robust"},
-    {"name": "IBP_eps02", "bound_type": "IBP", "eps": 0.2, "method": "robust"},
+    {"name": "IBP_eps005", "bound_type": "IBP", "eps": 0.01, "method": "robust"},
+    {"name": "IBP_eps01", "bound_type": "IBP", "eps": 0.02, "method": "robust"},
+    {"name": "CROWN_IBP_eps01", "bound_type": "CROWN-IBP", "eps": 0.05, "method": "robust"},
+    {"name": "CROWN_IBP_eps03", "bound_type": "CROWN-IBP", "eps": 0.1, "method": "robust"},
+    {"name": "CROWN_eps01", "bound_type": "CROWN", "eps": 0.05, "method": "robust"},
+    {"name": "CROWN_eps03", "bound_type": "CROWN", "eps": 0.1, "method": "robust"},
+    {"name": "CROWN_IBP_eps02", "bound_type": "CROWN-IBP", "eps": 0.05, "method": "robust"},
 ]
 
 def train_model(config, num_epochs=3, batch_size=256, lr=5e-4, device="cuda"):
@@ -86,13 +85,19 @@ def train_model(config, num_epochs=3, batch_size=256, lr=5e-4, device="cuda"):
     lr_scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=10, gamma=0.5)
     
     # Epsilon scheduler
-    if config['eps'] > 0:
-        eps_scheduler = LinearScheduler(config['eps'], f"start=0,length={len(train_loader)*num_epochs}")
-    else:
-        eps_scheduler = FixedScheduler(0.0)
+    eps_scheduler = FixedScheduler(config['eps'])
     
     norm = float("inf")
     num_class = 10
+    
+    # Training curves storage
+    training_curves = {
+        'train_loss': [],
+        'train_loss_batch': [],  # Per batch loss for more detailed tracking
+        'test_accuracy': [],
+        'epoch': [],
+        'batch': []
+    }
     
     # Training loop
     for epoch in range(1, num_epochs + 1):
@@ -100,6 +105,8 @@ def train_model(config, num_epochs=3, batch_size=256, lr=5e-4, device="cuda"):
         eps_scheduler.train()
         eps_scheduler.step_epoch()
         eps_scheduler.set_epoch_length(len(train_loader))
+        
+        epoch_train_losses = []
         
         for i, (data, labels) in enumerate(train_loader):
             eps_scheduler.step_batch()
@@ -137,7 +144,6 @@ def train_model(config, num_epochs=3, batch_size=256, lr=5e-4, device="cuda"):
             
             output = model(x)
             regular_ce = CrossEntropyLoss()(output, labels)
-            
             if batch_method == "robust" and config['bound_type'] is not None:
                 if config['bound_type'] == "IBP":
                     lb, ub = model.compute_bounds(IBP=True, C=c, method=None)
@@ -165,8 +171,19 @@ def train_model(config, num_epochs=3, batch_size=256, lr=5e-4, device="cuda"):
             loss.backward()
             optimizer.step()
             
+            # Record batch loss
+            batch_loss = loss.item()
+            epoch_train_losses.append(batch_loss)
+            training_curves['train_loss_batch'].append(batch_loss)
+            training_curves['batch'].append((epoch - 1) * len(train_loader) + i)
+            
             if i % 100 == 0:
-                print(f"Epoch {epoch}, Batch {i}, Loss: {loss.item():.4f}")
+                print(f"Epoch {epoch}, Batch {i}, Loss: {batch_loss:.4f}")
+        
+        # Record epoch average loss
+        avg_epoch_loss = np.mean(epoch_train_losses)
+        training_curves['train_loss'].append(avg_epoch_loss)
+        training_curves['epoch'].append(epoch)
         
         if eps_scheduler.reached_max_eps():
             lr_scheduler.step()
@@ -185,24 +202,36 @@ def train_model(config, num_epochs=3, batch_size=256, lr=5e-4, device="cuda"):
                 total += labels.size(0)
                 correct += (predicted == labels).sum().item()
             accuracy = 100 * correct / total
+            training_curves['test_accuracy'].append(accuracy)
             print(f"Epoch {epoch} Test Accuracy: {accuracy:.2f}%")
     
     # Save model
     model_path = f"models/{config['name']}.pth"
     os.makedirs("models", exist_ok=True)
+    
+    # Verify model weights are updated (check first layer weight sum)
+    first_layer_key = list(model_ori.state_dict().keys())[0]
+    weight_sum = model_ori.state_dict()[first_layer_key].sum().item()
+    print(f"Model weight verification - First layer weight sum: {weight_sum:.6f}")
+    
     torch.save({'state_dict': model_ori.state_dict()}, model_path)
     print(f"Model saved to {model_path}\n")
     
-    return model_path
+    return model_path, training_curves
 
-def evaluate_robustness(model_path, config, num_samples=10, eps_test=0.3, device="cuda"):
+def evaluate_robustness(model_path, config, num_samples=10, eps_test=0.2, device="cuda"):
     """Evaluate robustness of a trained model"""
     print(f"Evaluating robustness: {config['name']}")
+    print(f"  Loading model from: {model_path}")
     
     # Load model
     model_ori = models.Models['cnn_4layer'](in_ch=1, in_dim=28)
     checkpoint = torch.load(model_path, map_location='cpu')
     model_ori.load_state_dict(checkpoint['state_dict'])
+    
+    # Verify model is loaded correctly by checking a weight sum (for debugging)
+    first_layer_weight_sum = sum(model_ori.state_dict()[list(model_ori.state_dict().keys())[0]].flatten()).item()
+    print(f"  Model first layer weight sum: {first_layer_weight_sum:.6f} (for verification)")
     
     # Prepare test data
     test_data = torchvision.datasets.MNIST(
@@ -230,6 +259,17 @@ def evaluate_robustness(model_path, config, num_samples=10, eps_test=0.3, device
         bound_opts={'conv_mode': 'patches'}, 
         device=device_tensor)
     
+    # Get predictions on clean images (without perturbation)
+    with torch.no_grad():
+        pred_clean = lirpa_model(images)
+        pred_labels = torch.argmax(pred_clean, dim=1).cpu().detach().numpy()
+    
+    # Print predictions for debugging
+    print(f"  Predictions on clean images: {pred_labels.tolist()}")
+    print(f"  True labels: {true_labels.tolist()}")
+    clean_accuracy = (pred_labels == true_labels.numpy()).mean() * 100
+    print(f"  Clean accuracy: {clean_accuracy:.2f}%")
+    
     # Compute bounds using alpha-CROWN for tightest bounds
     ptb = PerturbationLpNorm(norm=float("inf"), eps=eps_test)
     bounded_images = BoundedTensor(images, ptb)
@@ -246,10 +286,6 @@ def evaluate_robustness(model_path, config, num_samples=10, eps_test=0.3, device
     lb, ub = lirpa_model.compute_bounds(
         x=(bounded_images,), 
         method='CROWN-Optimized')
-    
-    # Get predictions
-    pred = lirpa_model(bounded_images)
-    pred_labels = torch.argmax(pred, dim=1).cpu().detach().numpy()
     
     # Compute margin bounds for each sample
     results = {
@@ -298,8 +334,11 @@ def evaluate_robustness(model_path, config, num_samples=10, eps_test=0.3, device
         margin_lb_val = margin_lb[0, 0].item()
         margin_ub_val = margin_ub[0, 0].item()
         
-        # Check robustness: margin lower bound > 0 means robust
-        is_robust = margin_lb_val > 0
+        # Check robustness: 
+        # 1. Prediction must be correct on clean image
+        # 2. Margin lower bound > 0 means robust (guaranteed correct prediction under perturbation)
+        is_correct = (pred_label == true_label)
+        is_robust = is_correct and (margin_lb_val > 0)
         
         if is_robust:
             robust_count += 1
@@ -310,6 +349,7 @@ def evaluate_robustness(model_path, config, num_samples=10, eps_test=0.3, device
             'sample_id': i,
             'true_label': int(true_label),
             'pred_label': int(pred_label),
+            'is_correct': bool(is_correct),
             'is_robust': bool(is_robust),
             'margin_lb': float(margin_lb_val),
             'margin_ub': float(margin_ub_val),
@@ -321,14 +361,18 @@ def evaluate_robustness(model_path, config, num_samples=10, eps_test=0.3, device
         results['samples'].append(sample_result)
     
     # Overall statistics
+    correct_count = sum(1 for s in results['samples'] if s['is_correct'])
+    results['clean_accuracy'] = correct_count / N
     results['certified_robust_accuracy'] = robust_count / N
     results['avg_margin_lb'] = float(np.mean(margin_lbs))
     results['min_margin_lb'] = float(np.min(margin_lbs))
     results['max_margin_lb'] = float(np.max(margin_lbs))
     
+    print(f"  Clean Accuracy: {results['clean_accuracy']:.2%}")
     print(f"  Certified Robust Accuracy: {results['certified_robust_accuracy']:.2%}")
     print(f"  Average Margin Lower Bound: {results['avg_margin_lb']:.4f}")
-    print(f"  Min Margin Lower Bound: {results['min_margin_lb']:.4f}\n")
+    print(f"  Min Margin Lower Bound: {results['min_margin_lb']:.4f}")
+    print(f"  Robust samples: {robust_count}/{N}\n")
     
     return results
 
@@ -337,18 +381,23 @@ def main():
     print(f"Using device: {device}\n")
     
     all_results = []
+    all_training_curves = {}
     
     # Train and evaluate each model
     for config in EXPERIMENTS:
         try:
             # Train model
-            model_path = train_model(config, num_epochs=3, device=device)
+            model_path, training_curves = train_model(config, num_epochs=4, device=device)
             
-            # Evaluate robustness
+            # Save training curves
+            all_training_curves[config['name']] = training_curves
+            
+            # Evaluate robustness (using eps_test=0.2 for fair comparison)
+            # Increase num_samples for more reliable statistics
             result = evaluate_robustness(
                 model_path, config, 
-                num_samples=10, 
-                eps_test=0.3, 
+                num_samples=100,  # Increased from 10 to 100 for better statistics
+                eps_test=0.2, 
                 device=device)
             
             all_results.append(result)
@@ -364,19 +413,26 @@ def main():
     with open(output_file, 'w') as f:
         json.dump(all_results, f, indent=2)
     
+    # Save training curves to JSON
+    curves_file = "training_curves.json"
+    with open(curves_file, 'w') as f:
+        json.dump(all_training_curves, f, indent=2)
+    
     print(f"\n{'='*60}")
-    print("Results Summary")
+    print("Results Summary (evaluated at eps=0.2)")
     print(f"{'='*60}")
-    print(f"{'Model':<25} {'Robust Acc':<15} {'Avg Margin LB':<15} {'Min Margin LB':<15}")
-    print("-" * 60)
+    print(f"{'Model':<25} {'Clean Acc':<12} {'Robust Acc':<12} {'Avg Margin LB':<15} {'Min Margin LB':<15}")
+    print("-" * 80)
     
     for result in all_results:
         print(f"{result['model_name']:<25} "
-              f"{result['certified_robust_accuracy']:>6.2%}        "
+              f"{result.get('clean_accuracy', 0):>6.2%}      "
+              f"{result['certified_robust_accuracy']:>6.2%}      "
               f"{result['avg_margin_lb']:>10.4f}      "
               f"{result['min_margin_lb']:>10.4f}")
     
     print(f"\nDetailed results saved to {output_file}")
+    print(f"Training curves saved to {curves_file}")
 
 if __name__ == "__main__":
     main()

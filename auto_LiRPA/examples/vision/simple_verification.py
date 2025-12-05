@@ -61,7 +61,7 @@ lirpa_model.visualize("bounded_mnist_model.png")
 print()
 
 ## Step 4: Compute bounds using LiRPA given a perturbation
-eps = 0.1
+eps = 0.3
 norm = float("inf")
 
 # Save original images before perturbation

@@ -119,6 +119,14 @@ else:
     model_bound = BoundedModule(
         model_ori, (dummy_embeddings, dummy_mask), bound_opts=bound_opts, device=args.device)
 model.model_from_embeddings = model_bound
+
+# 如果加载了checkpoint且checkpoint包含BoundedModule的state_dict，需要重新加载
+if args.load and hasattr(model, '_checkpoint_bounded_module'):
+    try:
+        model_bound.load_state_dict(model._checkpoint_bounded_module, strict=False)
+        logger.info('BoundedModule state_dict loaded from checkpoint')
+    except Exception as e:
+        logger.warning(f'Failed to load BoundedModule state_dict: {e}')
 if args.loss_fusion:
     bound_opts['loss_fusion'] = True
     model_loss = BoundedModule(
