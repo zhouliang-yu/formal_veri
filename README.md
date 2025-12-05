@@ -1,5 +1,11 @@
 # Formal Verification for Deep Neural Network
 
+## Installation
+
+please refer to the installation instructions in the auto_LiRPA repository. You need to install the dependencies in the auto_LiRPA repository first.
+
+https://auto-lirpa.readthedocs.io/en/latest/installation.html
+
 
 ## Depth / Dropout / Width vs. Certified Robustness
 
