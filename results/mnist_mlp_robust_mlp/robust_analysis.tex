@@ -1,0 +1,48 @@
+\subsection{Training MNIST Networks with Robustness}
+\subsubsection{Experimental Configuration}
+
+We study fully-connected classifiers on MNIST under an $\ell_\infty$ threat model. Each model is pre-trained using standard cross-entropy until convergence and subsequently fine-tuned with interval bound propagation (IBP) losses at a prescribed perturbation radius $\epsilon \in \{0.05, 0.10, 0.20\}$. A ten-epoch linear schedule gradually increases the effective radius during fine-tuning. In parallel, we train counterparts that include the robust objective from the very beginning, providing a head-to-head comparison between post-training robustness and direct robust optimization. Evaluations report both natural accuracy and certified margins at $\{0.25, 0.5, 1.0, 1.5\}$ multiples of the training radius.
+
+\subsubsection{Results and Interpretation}
+
+Figure~\ref{fig:acc} compares the natural test accuracy of the two training paradigms. Despite identical optimization budgets, fine-tuned models dominate across all radii, with the margin widening as $\epsilon$ increases. At $\epsilon=0.20$, fine-tuning retains roughly \(96\%\) accuracy whereas the direct variant deteriorates to approximately \(90\%\), indicating substantial challenges when robustness constraints are imposed from scratch.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=.65\linewidth]{test_acc_compare.pdf}
+    \caption{Natural test accuracy comparison between post-training fine-tuning and direct robust training.}
+    \label{fig:acc}
+\end{figure}
+
+The certification curves in Figures~\ref{fig:curves05}--\ref{fig:curves20} reinforce these findings. For $\epsilon=0.05$, both models maintain high certified ratios at small perturbations, yet the post-trained network exhibits a noticeably slower decay as the perturbation grows. At $\epsilon=0.10$, the fine-tuned model still certifies about \(0.69\) of the samples at the target radius, while the direct model drops below \(0.58\). When $\epsilon=0.20$, direct robust training almost collapses—certified accuracy approaches zero beyond $\epsilon=0.10$—whereas the fine-tuned model continues to certify more than one third of the evaluation set at the target radius.
+
+\begin{figure}[h]
+    \centering
+    \begin{minipage}[t]{0.32\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{images/curves_finetuned_vs_direct_eps0.050.pdf}
+        \vspace{1mm}
+        \small{$\epsilon=0.05$}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.32\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{images/curves_finetuned_vs_direct_eps0.100.pdf}
+        \vspace{1mm}
+        \small{$\epsilon=0.10$}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.32\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{images/curves_finetuned_vs_direct_eps0.200.pdf}
+        \vspace{1mm}
+        \small{$\epsilon=0.20$}
+    \end{minipage}
+    \caption{Certified accuracy vs. evaluation $\epsilon$ for models trained with different target radii: left $\epsilon=0.05$, middle $\epsilon=0.10$, right $\epsilon=0.20$.}
+    \label{fig:cert_curve_panel}
+\end{figure}
+
+\subsubsection{Discussion}
+
+Imposing the full robust objective from initialization severely hampers optimization: gradients saturate early, warm-up schedules fail to recover accuracy, and certified margins remain poor. Post-training offers a simple yet effective remedy—first learn discriminative representations, then gradually incorporate robustness constraints. This staged approach consistently delivers superior natural accuracy and certified robustness, particularly under larger perturbations, underscoring its practical value for $\ell_\infty$-robust MNIST classifiers.
+

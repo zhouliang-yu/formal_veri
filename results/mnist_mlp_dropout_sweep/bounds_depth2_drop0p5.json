@@ -1,0 +1,146 @@
+[
+  {
+    "eps": 0.04,
+    "method": "IBP",
+    "min_margin_lb": -55.78275680541992,
+    "mean_margin_lb": -40.01646423339844,
+    "certified_ratio": 0.0,
+    "depth": 2,
+    "dropout": 0.5
+  },
+  {
+    "eps": 0.04,
+    "method": "IBP+backward (CROWN-IBP)",
+    "min_margin_lb": -31.423370361328125,
+    "mean_margin_lb": -17.41275405883789,
+    "certified_ratio": 0.0,
+    "depth": 2,
+    "dropout": 0.5
+  },
+  {
+    "eps": 0.04,
+    "method": "backward (CROWN)",
+    "min_margin_lb": -21.04408836364746,
+    "mean_margin_lb": -6.549873352050781,
+    "certified_ratio": 0.0,
+    "depth": 2,
+    "dropout": 0.5
+  },
+  {
+    "eps": 0.04,
+    "method": "CROWN-Optimized (alpha-CROWN)",
+    "min_margin_lb": -17.156551361083984,
+    "mean_margin_lb": -5.574225425720215,
+    "certified_ratio": 0.015625,
+    "depth": 2,
+    "dropout": 0.5
+  },
+  {
+    "eps": 0.02,
+    "method": "IBP",
+    "min_margin_lb": -27.029619216918945,
+    "mean_margin_lb": -17.42992401123047,
+    "certified_ratio": 0.0,
+    "depth": 2,
+    "dropout": 0.5
+  },
+  {
+    "eps": 0.02,
+    "method": "IBP+backward (CROWN-IBP)",
+    "min_margin_lb": -12.30278205871582,
+    "mean_margin_lb": -1.8977255821228027,
+    "certified_ratio": 0.0625,
+    "depth": 2,
+    "dropout": 0.5
+  },
+  {
+    "eps": 0.02,
+    "method": "backward (CROWN)",
+    "min_margin_lb": -8.899627685546875,
+    "mean_margin_lb": 3.923525810241699,
+    "certified_ratio": 0.484375,
+    "depth": 2,
+    "dropout": 0.5
+  },
+  {
+    "eps": 0.02,
+    "method": "CROWN-Optimized (alpha-CROWN)",
+    "min_margin_lb": -8.81536865234375,
+    "mean_margin_lb": 4.093389987945557,
+    "certified_ratio": 0.515625,
+    "depth": 2,
+    "dropout": 0.5
+  },
+  {
+    "eps": 0.01,
+    "method": "IBP",
+    "min_margin_lb": -16.012256622314453,
+    "mean_margin_lb": -4.666109085083008,
+    "certified_ratio": 0.015625,
+    "depth": 2,
+    "dropout": 0.5
+  },
+  {
+    "eps": 0.01,
+    "method": "IBP+backward (CROWN-IBP)",
+    "min_margin_lb": -7.992081165313721,
+    "mean_margin_lb": 4.839731216430664,
+    "certified_ratio": 0.734375,
+    "depth": 2,
+    "dropout": 0.5
+  },
+  {
+    "eps": 0.01,
+    "method": "backward (CROWN)",
+    "min_margin_lb": -7.100943565368652,
+    "mean_margin_lb": 7.151352882385254,
+    "certified_ratio": 0.921875,
+    "depth": 2,
+    "dropout": 0.5
+  },
+  {
+    "eps": 0.01,
+    "method": "CROWN-Optimized (alpha-CROWN)",
+    "min_margin_lb": -7.078985214233398,
+    "mean_margin_lb": 7.183544635772705,
+    "certified_ratio": 0.921875,
+    "depth": 2,
+    "dropout": 0.5
+  },
+  {
+    "eps": 0.005,
+    "method": "IBP",
+    "min_margin_lb": -11.050223350524902,
+    "mean_margin_lb": 2.5139269828796387,
+    "certified_ratio": 0.34375,
+    "depth": 2,
+    "dropout": 0.5
+  },
+  {
+    "eps": 0.005,
+    "method": "IBP+backward (CROWN-IBP)",
+    "min_margin_lb": -6.687726020812988,
+    "mean_margin_lb": 7.463131427764893,
+    "certified_ratio": 0.921875,
+    "depth": 2,
+    "dropout": 0.5
+  },
+  {
+    "eps": 0.005,
+    "method": "backward (CROWN)",
+    "min_margin_lb": -6.435693264007568,
+    "mean_margin_lb": 8.156158447265625,
+    "certified_ratio": 0.953125,
+    "depth": 2,
+    "dropout": 0.5
+  },
+  {
+    "eps": 0.005,
+    "method": "CROWN-Optimized (alpha-CROWN)",
+    "min_margin_lb": -6.427786827087402,
+    "mean_margin_lb": 8.162482261657715,
+    "certified_ratio": 0.953125,
+    "depth": 2,
+    "dropout": 0.5
+  }
+]

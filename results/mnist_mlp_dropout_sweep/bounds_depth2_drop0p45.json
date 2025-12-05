@@ -1,0 +1,38 @@
+[
+  {
+    "eps": 0.04,
+    "method": "CROWN-Optimized (alpha-CROWN)",
+    "min_margin_lb": -20.889755249023438,
+    "mean_margin_lb": -7.538262367248535,
+    "certified_ratio": 0.015625,
+    "depth": 2,
+    "dropout": 0.45
+  },
+  {
+    "eps": 0.02,
+    "method": "CROWN-Optimized (alpha-CROWN)",
+    "min_margin_lb": -10.065888404846191,
+    "mean_margin_lb": 4.254708290100098,
+    "certified_ratio": 0.40625,
+    "depth": 2,
+    "dropout": 0.45
+  },
+  {
+    "eps": 0.01,
+    "method": "CROWN-Optimized (alpha-CROWN)",
+    "min_margin_lb": -7.468817710876465,
+    "mean_margin_lb": 8.152663230895996,
+    "certified_ratio": 0.9375,
+    "depth": 2,
+    "dropout": 0.45
+  },
+  {
+    "eps": 0.005,
+    "method": "CROWN-Optimized (alpha-CROWN)",
+    "min_margin_lb": -6.4118499755859375,
+    "mean_margin_lb": 9.405034065246582,
+    "certified_ratio": 0.953125,
+    "depth": 2,
+    "dropout": 0.45
+  }
+]
