@@ -36,6 +36,13 @@ python examples/vision/plot_mlp_depth_heatmap.py \
   --format pdf
 ```
 
+results can be found in 
+```
+./results/mnist_mlp_depth
+./results/mnist_mlp_dropout_sweep
+./results/mnist_mlp_width_sweep
+
+
 ## Robust MNIST MLP Training (Pretrain vs. Direct)
 
 ### Goal
@@ -60,6 +67,11 @@ python examples/vision/mnist_mlp_robust_training.py \
 ```
 
 Use `--only-epsilon <value>` to retrain a single radius; use `--overwrite-pretrain` if the cached baseline should be regenerated.
+
+results can be found in 
+```
+./results/mnist_mlp_robust_mlp
+```
 
 ### Plotting Command (PDF figures for LaTeX)
 
