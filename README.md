@@ -8,6 +8,8 @@ cd formal_veri/auto_LiRPA/auto_LiRPA/examples/vision
 python simple_training.py
 # run evaluation
 python simple_verification.py
+```
+
 
 
 ### The NLP experiments (transformer with sst) 
@@ -20,3 +22,4 @@ python train.py --train --device cpu \
     --model transformer --num_epochs 10 \
     --dir trained_model
 # run eval
+```
